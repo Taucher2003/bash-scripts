@@ -30,7 +30,6 @@ EXTERNAL_URL="$gitlab_url" apt install gitlab-ee -y
 # Ask for Runner installation
 read -ep "Install a Runner? (y/n): " gitlab_runner;
 if [ "$gitlab_runner" == "y" ]; then
-    bash docker.sh
     bash gitlab_runner.sh "$gitlab_url"
 fi
 

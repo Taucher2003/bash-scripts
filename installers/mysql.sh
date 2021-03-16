@@ -22,4 +22,9 @@ apt install mariadb-server mariadb-client -y
 # Setup MariaDB
 mysql_secure_installation
 
+read -ep "Install phpMyAdmin? (y/n): " phpmyadmin;
+if [ "$phpmyadmin" == "y" ]; then
+    bash phpmyadmin.sh
+fi
+
 cd "$current_dir"

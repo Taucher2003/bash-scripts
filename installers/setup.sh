@@ -21,6 +21,12 @@ fi
 read -ep "Install Gitlab? (y/n): " gitlab;
 if [ "$gitlab" == "y" ]; then
     bash gitlab.sh
+else
+# If not installing Gitlab, ask for a single runner
+    read -ep "Install a Gitlab Runner? (y/n): " gitlab_runner;
+    if [ "$gitlab_runner" == "y" ]; then
+        bash gitlab_runner.sh
+    fi
 fi
 
 # Ask for Java

@@ -2,6 +2,8 @@ echo "Installing a Gitlab Runner"
 
 current_dir=`pwd`
 
+bash docker.sh
+
 # Update current system
 apt update
 
