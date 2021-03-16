@@ -21,16 +21,41 @@ else
     gitlab_url="$1"
 fi
 
+# If gitlab_url does not end with /, add it to the end
 if [ "$gitlab_url" != */ ]; then
     gitlab_url="$gitlab_url/"
 fi
 
-# Register Runner
+# Ask for registration data
 read -ep "Registration Token: " registration_token;
 read -ep "Description: " description;
 read -ep "Tag List (seperate by ,): " tag_list;
-read -ep "Run untagged: " -i "true" run_untagged;
-read -ep "Locked: " -i "false" locked;
+
+# Make these two answers idiotic proof, only true and false allowed
+while :
+do
+    read -ep "Run untagged (true/false): " -i "true" run_untagged;
+    if [ "$run_untagged" == "true" ]; then
+        break;
+    fi
+    if [ "$run_untagged" == "false" ]; then
+        break;
+    fi
+done
+
+
+while :
+do
+    read -ep "Locked (true/false): " -i "false" locked;
+    if [ "$locked" == "true" ]; then
+        break;
+    fi
+    if [ "$locked" == "false" ]; then
+        break;
+    fi
+done
+
+# Register the Runner
 docker exec -ti "$container_name" gitlab-runner register \
   --non-interactive \
   --url "$gitlab_url" \
