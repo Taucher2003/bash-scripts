@@ -1,12 +1,14 @@
-echo "Installing Runner"
+echo "Installing a Gitlab Runner"
+
+current_dir=`pwd`
 
 # Update current system
-sudo apt update
+apt update
 
 # Run Docker Image
 read -ep "Container Name: " container_name;
-docker run --name "$container_name" --restart always \
-    -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+docker run -d --name "$container_name" --restart always \
+    -v /srv/gitlab-runner/"$container_name"/config:/etc/gitlab-runner \
     -v /var/run/docker.sock:/var/run/docker.sock \
     gitlab/gitlab-runner:latest
 
@@ -15,6 +17,10 @@ if [ "$1" == "" ]; then
     read -ep "Gitlab URL: " gitlab_url;
 else
     gitlab_url="$1"
+fi
+
+if [ "$gitlab_url" != */ ]; then
+    gitlab_url="$gitlab_url/"
 fi
 
 # Register Runner
@@ -34,3 +40,5 @@ docker exec -ti "$container_name" gitlab-runner register \
   --run-untagged="$run_untagged" \
   --locked="$locked" \
   --access-level="not_protected"
+
+cd "$current_dir"

@@ -1,7 +1,6 @@
-cd /var/lib/dpkg/updates
-rm *
-cd /root
+current_dir=`pwd`
 
-apt update && apt upgrade -y
-apt install htop -y -f
-apt install sudo -y -f
+apt install htop -y
+apt install sudo -y
+
+cd "$current_dir"
