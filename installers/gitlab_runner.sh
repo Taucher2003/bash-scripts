@@ -2,6 +2,9 @@ echo "Installing a Gitlab Runner"
 
 current_dir=`pwd`
 
+if [ ! -f "docker.sh" ]; then
+    wget --no-check-certificate -O docker.sh 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker.sh'
+fi
 bash docker.sh
 
 # Update current system

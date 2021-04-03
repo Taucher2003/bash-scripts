@@ -24,9 +24,6 @@ This is something I can use very fast and not for others to collaborate on. Ther
 
 ## Installers
 
-Upload all files from the `installers` folder to the server.
-
 ```sh
-chmod +x setup.sh
-./setup.sh
+bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/setup.sh')
 ```

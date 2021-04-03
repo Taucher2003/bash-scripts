@@ -30,6 +30,9 @@ EXTERNAL_URL="$gitlab_url" apt install gitlab-ee -y
 # Ask for Runner installation
 read -ep "Install a Runner? (y/n): " gitlab_runner;
 if [ "$gitlab_runner" == "y" ]; then
+    if [ ! -f "gitlab_runner.sh" ]; then
+        wget --no-check-certificate -O gitlab_runner.sh 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/gitlab_runner.sh'
+    fi
     bash gitlab_runner.sh "$gitlab_url"
 fi
 
