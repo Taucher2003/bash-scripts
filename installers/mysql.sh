@@ -24,10 +24,7 @@ mysql_secure_installation
 
 read -ep "Install phpMyAdmin? (y/n): " phpmyadmin;
 if [ "$phpmyadmin" == "y" ]; then
-    if [ ! -f "phpmyadmin.sh" ]; then
-        wget --no-check-certificate -O phpmyadmin.sh 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/phpmyadmin.sh'
-    fi
-    bash phpmyadmin.sh
+    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/phpmyadmin.sh')
 fi
 
 cd "$current_dir"

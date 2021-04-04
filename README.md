@@ -24,6 +24,12 @@ This is something I can use very fast and not for others to collaborate on. Ther
 
 ## Installers
 
+Without file caching
 ```sh
 bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/setup.sh')
+```
+
+With file caching
+```sh
+bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/1.0/installers/setup.sh')
 ```
