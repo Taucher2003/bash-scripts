@@ -2,17 +2,33 @@ echo "Installing a Gitlab Runner"
 
 current_dir=`pwd`
 
-bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker.sh')
+if [ -x "$(command -v docker)" ]; then
+    echo "Docker already installed"
+else
+    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker.sh')
+fi
 
 # Update current system
 apt update
 
-# Run Docker Image
+# Ask for data of the container
 read -ep "Container Name: " container_name;
-docker run -d --name "$container_name" --restart always \
-    -v /srv/gitlab-runner/"$container_name"/config:/etc/gitlab-runner \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    gitlab/gitlab-runner:latest
+read -ep "Volume Template: " volume_template;
+
+# Check volume template and run container
+
+if [ "$volume_template" == "gradle" ] || [ "$volume_template" == "Gradle" ] || [ "$volume_template" == "maven" ] || [ "$volume_template" == "Maven" ]; then
+    docker run -d --name "$container_name" --restart always \
+        -v /srv/gitlab-runner/"$container_name"/config:/etc/gitlab-runner \
+        -v /srv/gitlab-runner/"$container_name"/cache:/home/maven/repository \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        gitlab/gitlab-runner:latest
+else 
+    docker run -d --name "$container_name" --restart always \
+        -v /srv/gitlab-runner/"$container_name"/config:/etc/gitlab-runner \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        gitlab/gitlab-runner:latest
+fi
 
 # Check if gitlab url is empty
 if [ "$1" == "" ]; then
