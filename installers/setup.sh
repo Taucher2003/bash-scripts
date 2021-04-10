@@ -5,16 +5,16 @@ cd /var/lib/dpkg/updates
 rm *
 cd "$current_dir"
 
-# Ask for update
-read -ep "Update current system? (y/n): " update;
-if [ "$update" == "y" ]; then
-    apt update && apt upgrade -y
-fi
-
 # Ask for general Setup
 read -ep "Default Setup? (y/n): " default;
 if [ "$default" == "y" ]; then
     bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/default_setup.sh')
+fi
+
+# Ask for update
+read -ep "Update current system? (y/n): " update;
+if [ "$update" == "y" ]; then
+    apt update && apt upgrade -y
 fi
 
 # Ask for Docker
