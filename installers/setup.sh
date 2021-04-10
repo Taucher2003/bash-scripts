@@ -17,6 +17,12 @@ if [ "$default" == "y" ]; then
     bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/default_setup.sh')
 fi
 
+# Ask for Docker
+read -ep "Docker? (y/n): " docker;
+if [ "$docker" == "y" ]; then
+    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker.sh')
+fi
+
 # Ask for Gitlab
 read -ep "Install Gitlab? (y/n): " gitlab;
 if [ "$gitlab" == "y" ]; then
