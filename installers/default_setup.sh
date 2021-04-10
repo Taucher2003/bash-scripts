@@ -2,6 +2,7 @@ current_dir=`pwd`
 
 apt-get install lsb-release -y
 apt-get install apt -y
+apt install apt-transport-https -y
 apt install htop -y
 apt install sudo -y
 apt install ufw -y
