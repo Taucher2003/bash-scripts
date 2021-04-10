@@ -1,12 +1,6 @@
 current_dir=`pwd`
 
-apt-get install lsb-release -y
-apt-get install apt -y
-apt install apt-transport-https -y
-apt install htop -y
-apt install sudo -y
-apt install ufw -y
-apt install curl -y
-apt install nano -y
+apt-get install lsb-release apt -y
+apt install apt-transport-https htop sudo ufw curl nano gpg -y
 
 cd "$current_dir"
