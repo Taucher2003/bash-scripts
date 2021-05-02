@@ -23,6 +23,12 @@ if [ "$docker" == "y" ]; then
     bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker.sh')
 fi
 
+# Ask for Docker Compose
+read -ep "Docker Compose? (y/n): " docker_compose;
+if [ "$docker_compose" == "y" ]; then
+    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker_compose.sh')
+fi
+
 # Ask for Gitlab
 read -ep "Install Gitlab? (y/n): " gitlab;
 if [ "$gitlab" == "y" ]; then
