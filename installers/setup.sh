@@ -29,10 +29,21 @@ if [ "$docker_compose" == "y" ]; then
     bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/docker_compose.sh')
 fi
 
+# Ask for TeamSpeak
+read -ep "TeamSpeak using Docker? (y/n): " teamspeak_dockerized;
+if [ "$teamspeak_dockerized" == "y" ]; then
+    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/teamspeak_dockerized.sh')
+fi
+
 # Ask for Gitlab
 read -ep "Install Gitlab? (y/n): " gitlab;
 if [ "$gitlab" == "y" ]; then
-    bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/gitlab.sh')
+    read -ep "Use Docker for Installation? (y/n): " gitlab_dockerized;
+    if [ "$gitlab_dockerized" == "y" ]; then
+        bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/gitlab_dockerized.sh')
+    else
+        bash <(wget --no-check-certificate -O - 'https://raw.githubusercontent.com/Taucher2003/bash-scripts/master/installers/gitlab.sh')
+    fi
 else
 # If not installing Gitlab, ask for a single runner
     read -ep "Install a Gitlab Runner? (y/n): " gitlab_runner;
